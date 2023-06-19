@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            var resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             LengthBar = new TrackBar();
             label1 = new Label();
             label2 = new Label();
@@ -44,11 +44,14 @@
             panel1 = new Panel();
             buttonStrong = new Button();
             buttonSimple = new Button();
+            passwordQuantity = new NumericUpDown();
+            label3 = new Label();
             ((System.ComponentModel.ISupportInitialize)LengthBar).BeginInit();
             groupBox1.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             groupBox2.SuspendLayout();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)passwordQuantity).BeginInit();
             SuspendLayout();
             // 
             // LengthBar
@@ -150,9 +153,9 @@
             labelVersion.AutoSize = true;
             labelVersion.Location = new Point(285, 9);
             labelVersion.Name = "labelVersion";
-            labelVersion.Size = new Size(46, 14);
+            labelVersion.Size = new Size(47, 14);
             labelVersion.TabIndex = 8;
-            labelVersion.Text = "v0.1.0.3";
+            labelVersion.Text = "v0.1.0.4";
             // 
             // groupBox1
             // 
@@ -183,7 +186,7 @@
             groupBox2.Controls.Add(panel1);
             groupBox2.Location = new Point(207, 53);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(115, 247);
+            groupBox2.Size = new Size(115, 157);
             groupBox2.TabIndex = 10;
             groupBox2.TabStop = false;
             groupBox2.Text = "Human Readable";
@@ -195,7 +198,7 @@
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(3, 18);
             panel1.Name = "panel1";
-            panel1.Size = new Size(109, 226);
+            panel1.Size = new Size(109, 136);
             panel1.TabIndex = 0;
             // 
             // buttonStrong
@@ -207,7 +210,7 @@
             buttonStrong.FlatStyle = FlatStyle.Flat;
             buttonStrong.Location = new Point(54, 0);
             buttonStrong.Name = "buttonStrong";
-            buttonStrong.Size = new Size(55, 226);
+            buttonStrong.Size = new Size(55, 136);
             buttonStrong.TabIndex = 1;
             buttonStrong.Text = "Strong";
             buttonStrong.UseVisualStyleBackColor = false;
@@ -222,17 +225,39 @@
             buttonSimple.FlatStyle = FlatStyle.Flat;
             buttonSimple.Location = new Point(0, 0);
             buttonSimple.Name = "buttonSimple";
-            buttonSimple.Size = new Size(53, 226);
+            buttonSimple.Size = new Size(53, 136);
             buttonSimple.TabIndex = 0;
             buttonSimple.Text = "Simple";
             buttonSimple.UseVisualStyleBackColor = false;
             buttonSimple.Click += buttonSimple_Click;
+            // 
+            // passwordQuantity
+            // 
+            passwordQuantity.Location = new Point(211, 275);
+            passwordQuantity.Maximum = new decimal(new int[] { 15, 0, 0, 0 });
+            passwordQuantity.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            passwordQuantity.Name = "passwordQuantity";
+            passwordQuantity.Size = new Size(111, 22);
+            passwordQuantity.TabIndex = 11;
+            passwordQuantity.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            passwordQuantity.ValueChanged += passwordQuantity_ValueChanged;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(211, 257);
+            label3.Name = "label3";
+            label3.Size = new Size(68, 14);
+            label3.TabIndex = 12;
+            label3.Text = "How many?";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 14F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(334, 411);
+            Controls.Add(label3);
+            Controls.Add(passwordQuantity);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Controls.Add(labelVersion);
@@ -252,6 +277,7 @@
             flowLayoutPanel1.PerformLayout();
             groupBox2.ResumeLayout(false);
             panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)passwordQuantity).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -273,5 +299,7 @@
         private Panel panel1;
         private Button buttonStrong;
         private Button buttonSimple;
+        private NumericUpDown passwordQuantity;
+        private Label label3;
     }
 }
