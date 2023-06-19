@@ -1,4 +1,7 @@
 using Microsoft.VisualBasic.ApplicationServices;
+using System;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace PasswordGenerator
 {
@@ -6,11 +9,11 @@ namespace PasswordGenerator
     {
         private static bool upper, lower, number, special;
         private static int pwlength;
+        private HttpClient httpClient;
         public Form1()
         {
             InitializeComponent();
             pwlength = 8;
-
         }
 
         private void LengthBar_Scroll(object sender, EventArgs e)
@@ -52,7 +55,7 @@ namespace PasswordGenerator
 
         private void buttonGenerate_Click(object sender, EventArgs e)
         {
-
+            UseWaitCursor = true;
             if (checkBoxUpper.Checked)
             {
                 upper = true;
@@ -88,6 +91,65 @@ namespace PasswordGenerator
             }
 
             textBoxGenerated.Text = PasswordGenerate.GeneratePassword(lower, upper, number, special, pwlength);
+            UseWaitCursor = false;
+        }
+
+        private async void buttonSimple_Click(object sender, EventArgs e)
+        {
+            using (HttpClient httpClient = new HttpClient())
+            {
+                try
+                {
+                    UseWaitCursor = true;
+                    string simplepass = "https://www.dinopass.com/password/simple";
+                    var response = await httpClient.GetAsync(simplepass);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string passwordresults = await response.Content.ReadAsStringAsync();
+                        textBoxGenerated.Text = passwordresults;
+                        UseWaitCursor = false;
+                    }
+                    else
+                    {
+                        MessageBox.Show($"We tried to request a simple password but failed with status code: {response.StatusCode}");
+                        UseWaitCursor = false;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"An error occurred: {ex.Message}");
+                }
+            }
+        }
+
+        private async void buttonStrong_Click(object sender, EventArgs e)
+        {
+            using (HttpClient httpClient = new HttpClient())
+            {
+                try
+                {
+                    UseWaitCursor = true;
+                    string strongpass = "https://www.dinopass.com/password/strong";
+                    var response = await httpClient.GetAsync(strongpass);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string passwordresults = await response.Content.ReadAsStringAsync();
+                        textBoxGenerated.Text = passwordresults;
+                        UseWaitCursor = false;
+                    }
+                    else
+                    {
+                        MessageBox.Show($"We tried to request a strong password but failed with status code: {response.StatusCode}");
+                        UseWaitCursor = false;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"An error occurred: {ex.Message}");
+                }
+            }
         }
     }
 }
